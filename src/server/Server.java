@@ -1,18 +1,20 @@
 package server;
 
 
+import java.io.Serializable;
+
 import org.apache.cxf.jaxws.JaxWsServerFactoryBean;
 
-public class Server {
+public class Server implements Serializable {
 
 	public static void main(String[] args) {
-		JaxWsServerFactoryBean config_DataAnalysisfactory = new JaxWsServerFactoryBean();
+		JaxWsServerFactoryBean factory = new JaxWsServerFactoryBean();
 		HelloCXFService analysisWS = new HelloCXFServiceImpl();
-		config_DataAnalysisfactory.setServiceClass(HelloCXFService.class);
-		config_DataAnalysisfactory.setAddress("http://localhost:8899/HelloService");
-		config_DataAnalysisfactory.setServiceBean(analysisWS);
-		config_DataAnalysisfactory.create();
-		
+		factory.setServiceClass(HelloCXFService.class);
+		factory.setAddress("http://localhost:8899/HelloService");
+		factory.setServiceBean(analysisWS);
+		factory.create();
+//		factory.getInInterceptors().add(new LoggingInInterceptor());
 	}
 
 }
